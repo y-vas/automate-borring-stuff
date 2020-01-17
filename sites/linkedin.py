@@ -14,7 +14,7 @@ class LinkedIn:
         self.driver.get("https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin")
 
         self._login()
-        self._jobs()
+
 
     def _login(self):
         sleep( 2 )
@@ -26,7 +26,14 @@ class LinkedIn:
         self.driver.find_element_by_xpath('//*[@id="app__container"]/main/div/form/div[3]/button').click()
         sleep( 2 )
 
-    def _jobs(self):
+
+    def search_jobs( self, many ):
+        for x in range( 0, many ):
+            print("jobs applied ", x)
+            self._get_a_job()
+
+
+    def _get_a_job(self):
 
         try:
             self.driver.get("https://www.linkedin.com/jobs")
@@ -47,4 +54,4 @@ class LinkedIn:
 
         except Exception as e:
             sleep( 2 )
-            self._jobs()
+            self._get_a_job()
