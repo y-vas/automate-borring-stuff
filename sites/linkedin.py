@@ -28,22 +28,23 @@ class LinkedIn:
 
     def _jobs(self):
 
-        # try:
-        self.driver.get("https://www.linkedin.com/jobs")
+        try:
+            self.driver.get("https://www.linkedin.com/jobs")
 
-        jobs = self.driver.find_element_by_xpath('//div[@data-scroll-name="jobs-you-may-be-interested-in"]')
-        links = jobs.find_elements_by_xpath('//li[contains(@id,"ember")]')
+            jobs = self.driver.find_element_by_xpath('//div[@data-scroll-name="jobs-you-may-be-interested-in"]')
+            links = jobs.find_elements_by_xpath('//li[contains(@id,"ember")]')
 
-        links[1].click()
+            links[1].click()
 
-        sleep( 2 )
-        # txt = self.driver.find_element_by_xpath('//span[@class="artdeco-button__text"]').text
+            sleep( 3 )
+            self.driver.find_elements_by_xpath('//*[@data-control-name="jobdetails_topcard_inapply"]')[0].click()
+            sleep( 2 )
+            self.driver.find_elements_by_xpath('//*[@data-control-name="submit_unify"]')[0].click()
 
         # sel_btn = self.driver.find_element_by_xpath('//button[contains(@id,"ember")]').click()
         # sel_btn = self.driver.find_element_by_xpath('//span[@class="artdeco-button__text"]').text
+        # print(txt)
 
-        print(txt)
-
-        # except Exception as e:
-        #     sleep( 2 )
-        #     self._jobs()
+        except Exception as e:
+            sleep( 2 )
+            self._jobs()
