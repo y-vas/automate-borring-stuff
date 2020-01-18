@@ -1,8 +1,5 @@
 from selenium import webdriver
 from time import sleep
-from config import *
-# from faker import Faker
-# fk = Faker()
 
 
 class LinkedIn:

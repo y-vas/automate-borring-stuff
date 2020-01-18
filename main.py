@@ -9,3 +9,8 @@ if 'find_job' in run:
     from sites.linkedin import LinkedIn
     bot = LinkedIn( EMAIL, PASSWORD )
     bot.search_jobs( 20 )
+
+if 'get_followers' in run:
+    from sites.instagram import Instagram
+    bot = Instagram( USERNAME_INSTA, PASSWORD_INSTA )
+    bot.followall()

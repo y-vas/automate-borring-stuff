@@ -1,18 +1,14 @@
 from selenium import webdriver
 from time import sleep
-from config import *
-# from faker import Faker
-# fk = Faker()
 
 
-class InstaBot:
+class Instagram:
     def __init__(self, username, pw):
         self.username = un
         self.driver = webdriver.Chrome()
         self.driver.get("https://instagram.com")
 
-    def _register():
-        print("")
+        self._login()
 
     def _login():
         sleep( 2 )
@@ -24,16 +20,6 @@ class InstaBot:
         sleep( 4 )
         self.driver.find_element_by_xpath("//button[contains(text(), 'Ahora no')]").click()
         sleep( 2 )
-
-    def get_unfollowers(self):
-        self.driver.find_element_by_xpath("//a[contains(@href,'/{}')]".format(self.username)).click()
-        sleep(2)
-        self.driver.find_element_by_xpath("//a[contains(@href,'/following')]").click()
-        following = self._get_names()
-        self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]").click()
-        followers = self._get_names()
-        not_following_back = [user for user in following if user not in followers]
-        print(not_following_back)
 
     def _get_names(self):
         sleep( 2 )
@@ -64,11 +50,6 @@ class InstaBot:
 
         return names
 
-    def _followall(self):
+    def followall(self):
         self.driver.get("https://www.instagram.com/explore/people/suggested/")
         print(self._get_names())
-
-
-
-my_bot = InstaBot(un, pw)
-# my_bot._followall()
