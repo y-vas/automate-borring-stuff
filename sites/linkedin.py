@@ -1,4 +1,4 @@
-from selenium import webdriver
+        from selenium import webdriver
 from time import sleep
 
 
@@ -40,10 +40,10 @@ class LinkedIn:
 
             links[1].click()
 
-            sleep( 3 )
-            self.driver.find_elements_by_xpath('//*[@data-control-name="jobdetails_topcard_inapply"]')[0].click()
-            sleep( 2 )
-            self.driver.find_elements_by_xpath('//*[@data-control-name="submit_unify"]')[0].click()
+            # sleep( 3 )
+            # self.driver.find_elements_by_xpath('//*[@data-control-name="jobdetails_topcard_inapply"]')[0].click()
+            # sleep( 2 )
+            # self.driver.find_elements_by_xpath('//*[@data-control-name="submit_unify"]')[0].click()
 
         # sel_btn = self.driver.find_element_by_xpath('//button[contains(@id,"ember")]').click()
         # sel_btn = self.driver.find_element_by_xpath('//span[@class="artdeco-button__text"]').text
@@ -51,4 +51,4 @@ class LinkedIn:
 
         except Exception as e:
             sleep( 2 )
-            self._get_a_job()
+            # self._get_a_job()

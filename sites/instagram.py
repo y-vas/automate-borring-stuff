@@ -4,18 +4,19 @@ from time import sleep
 
 class Instagram:
     def __init__(self, username, pw):
-        self.username = un
+        self.username = username
+        self.password = pw
         self.driver = webdriver.Chrome()
         self.driver.get("https://instagram.com")
 
         self._login()
 
-    def _login():
+    def _login(self):
         sleep( 2 )
         self.driver.find_element_by_xpath("//a[contains(text(), 'Entrar')]").click()
         sleep( 2 )
-        self.driver.find_element_by_xpath('//input[@name="username"]').send_keys(un)
-        self.driver.find_element_by_xpath('//input[@name="password"]').send_keys(pw)
+        self.driver.find_element_by_xpath('//input[@name="username"]').send_keys(self.username)
+        self.driver.find_element_by_xpath('//input[@name="password"]').send_keys(self.password)
         self.driver.find_element_by_xpath('//button[@type="submit"]').click()
         sleep( 4 )
         self.driver.find_element_by_xpath("//button[contains(text(), 'Ahora no')]").click()
@@ -53,3 +54,12 @@ class Instagram:
     def followall(self):
         self.driver.get("https://www.instagram.com/explore/people/suggested/")
         print(self._get_names())
+
+    def likeposts(self):
+        sleep( 5 )
+        self.driver.get("https://instagram.com")
+        scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/section/div[2]/div[1]/div')
+        foll = scroll_box.find_elements_by_xpath('//article')
+
+        for art in foll:
+            print(art)
