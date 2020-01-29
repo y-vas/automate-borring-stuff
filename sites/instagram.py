@@ -6,9 +6,8 @@ class Instagram(Site):
         self.host = "https://instagram.com"
         self.password = pw
         self.username = username
-
         Site.__init__(self)
-        sleep(1000)
+
         self._login()
 
     def _login(self):
