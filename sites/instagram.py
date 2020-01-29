@@ -1,14 +1,14 @@
-from selenium import webdriver
 from time import sleep
+from sites._site import Site
 
-
-class Instagram:
+class Instagram(Site):
     def __init__(self, username, pw):
-        self.username = username
+        self.host = "https://instagram.com"
         self.password = pw
-        self.driver = webdriver.Chrome()
-        self.driver.get("https://instagram.com")
+        self.username = username
 
+        Site.__init__(self)
+        sleep(1000)
         self._login()
 
     def _login(self):
