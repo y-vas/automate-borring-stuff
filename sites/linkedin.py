@@ -2,6 +2,7 @@ from selenium import webdriver
 from time import sleep
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from config import *
 
 class LinkedIn:
     def __init__(self, email, password):
@@ -12,7 +13,6 @@ class LinkedIn:
         self.driver.get("https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin")
 
         self._login()
-
 
     def _login(self):
         sleep( 2 )

@@ -3,7 +3,7 @@ from sites._site import Site
 
 class Instagram(Site):
     def __init__(self, username, pw):
-        self.host = "https://instagram.com"
+        self.host = "https://www.instagram.com/accounts/login/"
         self.password = pw
         self.username = username
         Site.__init__(self)
@@ -11,8 +11,6 @@ class Instagram(Site):
         self._login()
 
     def _login(self):
-        sleep( 2 )
-        self.driver.find_element_by_xpath("//a[contains(text(), 'Entrar')]").click()
         sleep( 2 )
         self.driver.find_element_by_xpath('//input[@name="username"]').send_keys(self.username)
         self.driver.find_element_by_xpath('//input[@name="password"]').send_keys(self.password)

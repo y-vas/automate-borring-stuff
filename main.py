@@ -19,7 +19,7 @@ if 'likeposts' in run:
     bot = Instagram( USERNAME_INSTA, PASSWORD_INSTA )
     bot.likeposts()
 
-# if 'get_a_girlfriend' in run:
-#     from sites.tinder import Tinder
-#     bot = Instagram( USERNAME_INSTA, PASSWORD_INSTA )
-#     bot.likeposts()
+if 'get_a_girlfriend' in run:
+    from sites.tinder import TinderBot
+    bot = TinderBot(  )
+    bot.login()
