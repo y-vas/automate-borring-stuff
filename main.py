@@ -1,7 +1,6 @@
 import sys
 from config import *
 
-
 run = sys.argv
 
 
