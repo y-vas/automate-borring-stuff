@@ -6,14 +6,13 @@ import mysql.connector
 
 config = configparser.ConfigParser()
 config.read('../.env',encoding='utf-8-sig')
-
 cnf = config['ENVIROMENT_VARIABLES']
 
 cnx = mysql.connector.connect(
-    user=cnf['DB_USERNAME'],
-    password=cnf['DB_PASSWORD'],
-    host=cnf['DB_HOST'],
-    database=cnf['DB_DATABASE']
+    user     =cnf['DB_USERNAME'],
+    password =cnf['DB_PASSWORD'],
+    host     =cnf['DB_HOST'],
+    database =cnf['DB_DATABASE']
 )
 
 cursor = cnx.cursor()
@@ -31,7 +30,7 @@ for x in data.keys():
 
     for q in quers:
         cursor.execute(q)
-        print('INSERTAT \n',q,'\n')
+        print('INSERTING: \n',q,'\n')
 
 cnx.close()
-print('sha acabat')
+print('End')
