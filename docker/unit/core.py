@@ -1,37 +1,35 @@
-from selenium import webdriver
 from time import sleep
 from faker import Faker
 from selenium import webdriver
 from faker import Faker
 import configparser
 
-# config = configparser.ConfigParser()
-# config.read('../../.env',encoding='utf-8-sig')
-# cnf = config['ENVIROMENT_VARIABLES']
+config = configparser.ConfigParser()
+config.read('../../.env',encoding='utf-8-sig')
+cnf = config['ENVIROMENT_VARIABLES']
 options = webdriver.ChromeOptions()
 options.add_argument('--load-extension=path/to/the/extension')
 
-class Site:
-
+class Unit():
     def __init__(self):
+        self.host = cnf['HOST_NAME']
+        self.page = f"http://{self.host}/es/registre"
         self.driver = webdriver.Chrome()
-        self.driver.get( self.host )
-        # self.host = cnf['HOST_NAME']
-        # self.page = f"http://{self.host}/es/registre"
+        self.driver.get( self.page )
         self.fk = Faker()
 
-    def rd(self,ru):
+    def re(self,ru):
         self.driver.get( f'http://{self.host}/{ru}' )
 
-    def goto(self,id,tp='id'):
-        elem = self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
+    def go(self,id):
+        elem = self.driver.find_element_by_xpath(f'//*[@id="{id}"]')
         self.driver.execute_script("return arguments[0].scrollIntoView();", elem)
         return elem
 
-    def get(self,id,tp='id'):
-        return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
+    def get(self,id):
+        return self.driver.find_element_by_xpath(f'//*[@id="{id}"]')
 
-    def ex(self,id):
+    def clk(self,id):
         elem = self.get(id)
         try:
             elem.click()

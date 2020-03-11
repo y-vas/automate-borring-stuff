@@ -1,0 +1,106 @@
+{
+  "2020-02-20":[
+    "ALTER TABLE `Establiments` CHANGE `EstALdatasignat` `EstALdatasignat` DATE NULL, CHANGE `EstALRepresentant` `EstALRepresentant` VARCHAR(200) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALdni` `EstALdni` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALraosocial` `EstALraosocial` VARCHAR(200) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALapoderat` `EstALapoderat` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALcif` `EstALcif` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALadresa` `EstALadresa` VARCHAR(250) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALdatanotari` `EstALdatanotari` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALnomnotari` `EstALnomnotari` VARCHAR(200) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALnumprotocol` `EstALnumprotocol` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALregistroMercantil` `EstALregistroMercantil` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALnumtomo` `EstALnumtomo` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALnumfolio` `EstALnumfolio` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL, CHANGE `EstALnumhoja` `EstALnumhoja` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci NULL;",
+    "UPDATE `Traduccions` SET `TraText`='{\"ca\":\"Establiment\",\"es\":\"Establecimiento\",\"en\":\"Establishment\"}' WHERE `TraId`='1749';"
+  ], "2020-02-21": [
+    "CREATE TABLE `GeoProvincies` ( `GPoId` int(11) NOT NULL AUTO_INCREMENT, `GPoOrdre` int(11) NOT NULL DEFAULT '0',`GPoPais` int(11) NOT NULL DEFAULT '0',`GPoNom` varchar(250) NOT NULL,`GPoImatge` varchar(200) NOT NULL,`GPoActiu` tinyint(4) NOT NULL DEFAULT '1',PRIMARY KEY (`GPoId`),KEY `GCoActiu` (`GPoActiu`),KEY `GPoOrdre` (`GPoOrdre`)) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Araba/Álava\",\"es\":\"Araba/Álava\",\"en\":\"Araba/Álava\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Albacete\",\"es\":\"Albacete\",\"en\":\"Albacete\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Alicante/Alacant\",\"es\":\"Alicante/Alacant\",\"en\":\"Alicante/Alacant\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Almería\",\"es\":\"Almería\",\"en\":\"Almería\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Ávila\",\"es\":\"Ávila\",\"en\":\"Ávila\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Badajoz\",\"es\":\"Badajoz\",\"en\":\"Badajoz\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Balears (Illes)\",\"es\":\"Balears (Illes)\",\"en\":\"Balears (Illes)\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Barcelona\",\"es\":\"Barcelona\",\"en\":\"Barcelona\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Burgos\",\"es\":\"Burgos\",\"en\":\"Burgos\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Cáceres\",\"es\":\"Cáceres\",\"en\":\"Cáceres\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Cádiz\",\"es\":\"Cádiz\",\"en\":\"Cádiz\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Castellón/Castelló\",\"es\":\"Castellón/Castelló\",\"en\":\"Castellón/Castelló\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Ciudad Real\",\"es\":\"Ciudad Real\",\"en\":\"Ciudad Real\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Córdoba\",\"es\":\"Córdoba\",\"en\":\"Córdoba\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Coruña (A)\",\"es\":\"Coruña (A)\",\"en\":\"Coruña (A)\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Cuenca\",\"es\":\"Cuenca\",\"en\":\"Cuenca\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Girona\",\"es\":\"Girona\",\"en\":\"Girona\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Granada\",\"es\":\"Granada\",\"en\":\"Granada\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Guadalajara\",\"es\":\"Guadalajara\",\"en\":\"Guadalajara\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Gipuzkoa\",\"es\":\"Gipuzkoa\",\"en\":\"Gipuzkoa\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Huelva\",\"es\":\"Huelva\",\"en\":\"Huelva\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Huesca\",\"es\":\"Huesca\",\"en\":\"Huesca\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Jaén\",\"es\":\"Jaén\",\"en\":\"Jaén\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"León\",\"es\":\"León\",\"en\":\"León\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Lleida\",\"es\":\"Lleida\",\"en\":\"Lleida\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Rioja (La)\",\"es\":\"Rioja (La)\",\"en\":\"Rioja (La)\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Lugo\",\"es\":\"Lugo\",\"en\":\"Lugo\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Madrid\",\"es\":\"Madrid\",\"en\":\"Madrid\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Málaga\",\"es\":\"Málaga\",\"en\":\"Málaga\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Murcia\",\"es\":\"Murcia\",\"en\":\"Murcia\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Navarra\",\"es\":\"Navarra\",\"en\":\"Navarra\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Ourense\",\"es\":\"Ourense\",\"en\":\"Ourense\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Asturias\",\"es\":\"Asturias\",\"en\":\"Asturias\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Palencia\",\"es\":\"Palencia\",\"en\":\"Palencia\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Palmas (Las)\",\"es\":\"Palmas (Las)\",\"en\":\"Palmas (Las)\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Pontevedra\",\"es\":\"Pontevedra\",\"en\":\"Pontevedra\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Salamanca\",\"es\":\"Salamanca\",\"en\":\"Salamanca\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Santa Cruz de Tenerife\",\"es\":\"Santa Cruz de Tenerife\",\"en\":\"Santa Cruz de Tenerife\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Cantabria\",\"es\":\"Cantabria\",\"en\":\"Cantabria\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Segovia\",\"es\":\"Segovia\",\"en\":\"Segovia\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Sevilla\",\"es\":\"Sevilla\",\"en\":\"Sevilla\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Soria\",\"es\":\"Soria\",\"en\":\"Soria\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Tarragona\",\"es\":\"Tarragona\",\"en\":\"Tarragona\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Teruel\",\"es\":\"Teruel\",\"en\":\"Teruel\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Toledo\",\"es\":\"Toledo\",\"en\":\"Toledo\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Valencia/València\",\"es\":\"Valencia/València\",\"en\":\"Valencia/València\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Valladolid\",\"es\":\"Valladolid\",\"en\":\"Valladolid\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Bizkaia\",\"es\":\"Bizkaia\",\"en\":\"Bizkaia\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Zamora\",\"es\":\"Zamora\",\"en\":\"Zamora\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Zaragoza\",\"es\":\"Zaragoza\",\"en\":\"Zaragoza\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Ceuta\",\"es\":\"Ceuta\",\"en\":\"Ceuta\"}','',1);",
+    "INSERT INTO `GeoProvincies` VALUES (null,0,1,'{\"ca\":\"Melilla\",\"es\":\"Melilla\",\"en\":\"Melilla\"}','',1);",
+    "INSERT INTO `Traduccions` VALUES (null,'general','ForProvincies','{\"ca\":\"Provincies\",\"es\":\"Provincias\",\"en\":\"Provinces\"}',0);"
+  ],
+  "2020-02-24":[
+    "INSERT INTO `Traduccions` VALUES (null,'general','TxtNomRaoSocial','{\"ca\":\"Nom o Raó social\",\"es\":\"Nombre o Razón Social\",\"en\":\"Name or Social reason\"}',0);",
+    "UPDATE Traduccions SET `TraText`='{\"ca\":\"Tancar Sessió\",\"es\":\"Cerrar Session\",\"en\":\"Log Out\"}' WHERE `TraCamp`='TxtDesconnectar';",
+    "INSERT INTO `Traduccions` VALUES (null,'general','TxtLaTevaLlista','{\"ca\":\"La Teva Llista\",\"es\":\"Tu lista\",\"en\":\"Your list\"}',0);",
+    "INSERT INTO `Traduccions` VALUES (null,'general','TxtCreaEsdeven','{\"ca\":\"CREA EL TEU ESDEVENIMENT\",\"es\":\"CREA TU EVENTO\",\"en\":\"CREATE YOUR EVENT\"}',0);"
+  ],
+  "2020-02-27":[
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtPerfilPersonal', '{\"ca\":\"Perfil Personal\",\"es\":\"Perfil Personal\",\"en\":\"Personal Profile\"}', '0');",
+    "UPDATE Traduccions SET `TraText`='{\"ca\":\"Modificar la contrassenya\",\"es\":\"Modificar la contraseña\",\"en\":\"Modify Password\"}' WHERE `TraId`='81';",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtPerfilEstabliment', '{\"ca\":\"Perfil Establiment\",\"es\":\"Perfil Establecimiento\",\"en\":\"Establishment Profile\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtDadesBancaries', '{\"ca\":\"Dades Bancàries\",\"es\":\"Datos Bancarios\",\"en\":\"Bank Information\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtDadesFsicals', '{\"ca\":\"Dades Fiscals\",\"es\":\"Datos Fiscales\",\"en\":\"Tax Details\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtDadesBancaries', '{\"ca\":\"Dades Bancàries\",\"es\":\"Datos Bancarios\",\"en\":\"Bank Information\"}', '0');"
+  ],
+  "2020-02-28":[
+    "UPDATE `Traduccions` SET `TraText`='{\"ca\":\"Data de naixement\",\"es\":\"Fecha nacimiento\",\"en\"=\"Birth Date\"}' WHERE `TraId`='86';",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtNouContacte', '{\"ca\":\"Nou Contacte\",\"es\":\"Nuevo Contacto\",\"en\":\"New Contact\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtContacts', '{\"ca\":\"Contectes\",\"es\":\"Contactos\",\"en\":\"Contacts\"}', '0');"
+  ],
+  "2020-03-01":[
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'TxtNomEstab', '{\"ca\":\"Nom del Establiment\",\"es\":\"Nombre del Establecimiento\",\"en\":\"Establishment Name\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForCA', '{\"ca\":\"Comunitat Autonoma\",\"es\":\"Comunidad Autonoma\",\"en\":\"Autonomous community\"}', '0');",
+    "UPDATE `Traduccions` SET `TraText`='{\"ca\":\"Compte IBAN\",\"es\":\"Cuenta IBAN\",\"en\":\"IBAN\"}' WHERE `TraId`='1541';",
+    "ALTER TABLE `Establiments` ADD COLUMN `EstBank` LONGTEXT NULL AFTER `EstDataAlta`;"
+  ],
+  "2020-03-03":[
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'BtnEAfgEstabliment','{\"ca\":\"Afegir lloc\",\"es\":\"Añadir lugar\",\"en\":\"Add venue\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForHoja','{\"ca\":\"Hoja\",\"es\":\"Hoja\",\"en\":\"Hoja\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForFolio','{\"ca\":\"Folio\",\"es\":\"Folio\",\"en\":\"Folio\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForTomo','{\"ca\":\"Tomo\",\"es\":\"Tomo\",\"en\":\"Tomo\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForRegistreMercantil','{\"ca\":\"Registre Mercantil\",\"es\":\"Registre Mercantil\",\"en\":\"Registre Mercantil\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForProtocol','{\"ca\":\"Protocol\",\"es\":\"Protocol\",\"en\":\"Protocol\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForSignat','{\"ca\":\"Signat\",\"es\":\"Firmado\",\"en\":\"Signed\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForApoderado','{\"ca\":\"Apoderat\",\"es\":\"Apoderado\",\"en\":\"Atorney\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForDataNotario','{\"ca\":\"Data Notari\",\"es\":\"Data Notario\",\"en\":\"Notary Data\"}', '0');",
+    "INSERT INTO `Traduccions`  VALUES (NULL , 'general', 'ForNotariNom','{\"ca\":\"Nom del Notari\",\"es\":\"Nombre del  Notario\",\"en\":\"Notary Name\"}', '0');"
+  ],
+  "2020-03-05":[
+    "CREATE TABLE `EsdevenimentsPeriodes` (`id` INT NOT NULL AUTO_INCREMENT,`esdeveniment` INT NULL COMMENT 'Taula dels periodes de un sol esdeveniment',`salas` LONGTEXT NULL,`allotjament` LONGTEXT NULL,`restauracio` LONGTEXT NULL,`activitats` LONGTEXT NULL,`horaris` LONGTEXT NULL, PRIMARY KEY (`id`));",
+    "CREATE TABLE `Esdeveniments` (`id` int(11) NOT NULL AUTO_INCREMENT,`id_client` int(11) DEFAULT NULL,`nom` varchar(45) DEFAULT NULL,`referencia` varchar(45) DEFAULT NULL,`meta` longtext,`estat` int(11) DEFAULT NULL,PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=big5;"
+  ],
+  "2020-03-06":[
+    "ALTER TABLE `Esdeveniments` ADD COLUMN `start` DATETIME NULL AFTER `estat`,ADD COLUMN `end` DATETIME NULL AFTER `start`,ADD COLUMN `assistents` INT NULL AFTER `end`,ADD COLUMN `tipologia` VARCHAR(45) NULL AFTER `assistents`,ADD COLUMN `establiments` LONGTEXT NULL AFTER `tipologia`,ADD COLUMN `flexible` INT NULL AFTER `establiments`;"
+  ]
+
+}
