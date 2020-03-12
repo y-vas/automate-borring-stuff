@@ -1,7 +1,7 @@
 from selenium import webdriver
 from time import sleep
 from faker import Faker
-import configparser
+import configparser , webdriver_manager as wm
 
 # config = configparser.ConfigParser()
 # config.read('../../.env',encoding='utf-8-sig')
@@ -19,41 +19,6 @@ class Core:
         self.driver.get( self.host )
         self.fk = Faker()
 
-    def _driver(self, driver = None):
-        check_drivers = self.drivers
-
-        if driver is not None:
-            check_drivers = [driver]
-
-        for driver in check_drivers :
-            try:
-                eval(f"self.{driver}()")
-                return
-            except:
-                continue
-        raise
-
-    def chrome(self):
-        try:
-            self.driver = webdriver.Chrome()
-        except:
-            from webdriver_manager.chrome import ChromeDriverManager
-            self.driver = webdriver.Chrome(ChromeDriverManager().install())
-
-    def firefox(self):
-        try:
-            self.driver = webdriver.Firefox()
-            return
-        except:
-            print('firefox - not avaliables')
-        try:
-            from webdriver_manager.firefox import GeckoDriverManager
-            self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-            return
-        except:
-            print('firefox-drivers - not avaliable')
-
-        raise
 
     def rd(self,ru):
         self.driver.get( f'http://{self.host}/{ru}' )
@@ -85,3 +50,55 @@ class Core:
         except: val = eval(f'fake.{what}()')
         self.get( id, tp ).send_keys(val)
         setattr(self, what,val)
+
+# Driver hanndeling
+# ------------------------------------------------------------------------------
+
+    def _driver(self, driver = None):
+        check_drivers = self.drivers
+
+        if driver is not None:
+            check_drivers = [driver]
+
+        for driver in check_drivers :
+            try:
+                eval(f"self.{driver}()")
+                return
+            except:
+                continue
+        raise
+
+    def chrome(self):
+        try:
+            self.driver = webdriver.Chrome()
+            return
+        except: print('chrome - not avaliable')
+
+        try:
+            self.driver = webdriver.Chrome(
+                executable_path="/usr/bin/chromedriver"
+            )
+            return
+        except: print('chrome-local - not avaliable')
+
+        try:
+            self.driver = webdriver.Chrome(
+                wm.chrome.ChromeDriverManager().install()
+            )
+            return
+        except: print('chrome-driver - not avaliable')
+
+    def firefox(self):
+        try:
+            self.driver = webdriver.Firefox()
+            return
+        except: print('firefox - not avaliable')
+
+        try:
+            self.driver = webdriver.Firefox(
+                executable_path=wm.firefox.GeckoDriverManager().install()
+            )
+            return
+        except: print('firefox-drivers - not avaliable')
+
+        raise

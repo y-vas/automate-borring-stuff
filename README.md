@@ -1,3 +1,12 @@
+# RaspBerry WebCardReader ( KOMPINI )
 
-pip requirements
-pip install selenium webdriver-manager
+```
+A simple web card reader powered by a
+RaspBerry
+
+Developed in Python3
+```
+### Instalation
+![sas](images/imager.png)
+
+### Dependencies
