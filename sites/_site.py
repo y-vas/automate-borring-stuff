@@ -12,16 +12,19 @@ import configparser , webdriver_manager as wm
 class Core:
 
     drivers = ['chrome','firefox']
+    cnf = {}
 
     def __init__(self, driver = None):
         self._driver( driver )
-        self.host = 'https:/www.google.com'
+
+        if not hasattr(self, 'host'):
+            self.host = 'https://www.google.com'
+
         self.driver.get( self.host )
         self.fk = Faker()
 
-
-    def rd(self,ru):
-        self.driver.get( f'http://{self.host}/{ru}' )
+    def rd(self,ru = ''):
+        self.driver.get( f'{self.host}/{ru}' )
 
     def go(self,id,tp='id'):
         elem = self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
@@ -31,7 +34,7 @@ class Core:
     def get(self,id,tp='id'):
         return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
 
-    def ex(self,id,tp='id'):
+    def ex(self,id ,tp='id' ):
         elem = self.get(id,tp)
         try:
             elem.click()
@@ -39,7 +42,13 @@ class Core:
             self.go(id,tp).click()
 
     def set(self,id,what=0,tp='id'):
-        self.get(id,tp=tp).send_keys(cnf[what])
+        elem = self.get(id,tp=tp)
+        elem.clear()
+
+        if what not in self.cnf.keys():
+            elem.send_keys(what)
+        else:
+            elem.send_keys(self.cnf[what])
 
     def sel(self,id,what,tp='id'):
         self.driver.execute_script(f"return arguments[0].selectedIndex = {what};", self.get(id,tp))
@@ -49,7 +58,7 @@ class Core:
         try: val = eval(f'self.{what}')
         except: val = eval(f'fake.{what}()')
         self.get( id, tp ).send_keys(val)
-        setattr(self, what,val)
+        setattr(self, what, val)
 
 # Driver hanndeling
 # ------------------------------------------------------------------------------
