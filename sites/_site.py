@@ -10,7 +10,6 @@ import configparser , webdriver_manager as wm
 # options.add_argument('--load-extension=path/to/the/extension')
 
 class Core:
-
     drivers = ['chrome','firefox']
     cnf = {}
 

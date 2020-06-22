@@ -9,7 +9,7 @@ class LinkedIn:
         self.email = email
         self.passw = password
 
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome( ChromeDriverManager().install() )
         self.driver.get("https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin")
 
         self._login()
@@ -23,7 +23,6 @@ class LinkedIn:
         sleep( 4 )
         self.driver.find_element_by_xpath('//*[@id="app__container"]/main/div/form/div[3]/button').click()
         sleep( 2 )
-
 
     def search_jobs( self, many ):
         for x in range( 0, many ):

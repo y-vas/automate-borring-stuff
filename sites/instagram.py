@@ -1,12 +1,12 @@
 from time import sleep
-from sites._site import Site
+from sites._site import Core
 
-class Instagram(Site):
+class Instagram(Core):
     def __init__(self, username, pw):
         self.host = "https://www.instagram.com/accounts/login/"
         self.password = pw
         self.username = username
-        Site.__init__(self)
+        Core.__init__(self)
 
         self._login()
 

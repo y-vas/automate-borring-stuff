@@ -1,22 +1,24 @@
 import sys
-from config import *
 
 run = sys.argv
 
-
 if 'find_job' in run:
     from sites.linkedin import LinkedIn
-    bot = LinkedIn( EMAIL, PASSWORD )
+    bot = LinkedIn( 'EMAIL', 'PASSWORD' )
     bot.search_jobs( 20 )
 
 if 'get_followers' in run:
     from sites.instagram import Instagram
-    bot = Instagram( USERNAME_INSTA, PASSWORD_INSTA )
+
+    bot = Instagram(
+        input('introduce your name'),
+        input('introduce your pass')
+    )
     bot.followall()
 
 if 'likeposts' in run:
     from sites.instagram import Instagram
-    bot = Instagram( USERNAME_INSTA, PASSWORD_INSTA )
+    bot = Instagram( 'USERNAME_INSTA', 'PASSWORD_INSTA' )
     bot.likeposts()
 
 if 'get_a_girlfriend' in run:
