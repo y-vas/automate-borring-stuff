@@ -1,17 +1,14 @@
 from selenium import webdriver
 from time import sleep
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from config import *
+from sites._site import Core
 
-class LinkedIn:
+class LinkedIn(Core):
     def __init__(self, email, password):
         self.email = email
         self.passw = password
 
-        self.driver = webdriver.Chrome( ChromeDriverManager().install() )
+        Core.__init__(self)
         self.driver.get("https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin")
-
         self._login()
 
     def _login(self):

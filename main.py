@@ -10,15 +10,21 @@ if 'find_job' in run:
 if 'get_followers' in run:
     from sites.instagram import Instagram
 
+    # bot = Instagram(
+    #     input('introduce your name'),
+    #     input('introduce your pass')
+    # )
+
     bot = Instagram(
         input('introduce your name'),
         input('introduce your pass')
     )
+
     bot.followall()
 
 if 'likeposts' in run:
     from sites.instagram import Instagram
-    bot = Instagram( 'USERNAME_INSTA', 'PASSWORD_INSTA' )
+    bot = Instagram( 'USERNAME_INSTA' , 'PASSWORD_INSTA' )
     bot.likeposts()
 
 if 'get_a_girlfriend' in run:

@@ -43,7 +43,7 @@ class Instagram(Core):
         foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
 
         for fb in foll:
-            sleep(2)
+            sleep( 2 )
             fb.click()
 
         return names
