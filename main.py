@@ -1,5 +1,5 @@
 import sys
-
+from secret import *
 run = sys.argv
 
 if 'find_job' in run:
@@ -10,16 +10,7 @@ if 'find_job' in run:
 if 'get_followers' in run:
     from sites.instagram import Instagram
 
-    # bot = Instagram(
-    #     input('introduce your name'),
-    #     input('introduce your pass')
-    # )
-
-    bot = Instagram(
-        input('introduce your name'),
-        input('introduce your pass')
-    )
-
+    bot = Instagram( NAME, PASS )
     bot.followall()
 
 if 'likeposts' in run:
