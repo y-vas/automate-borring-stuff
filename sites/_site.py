@@ -3,12 +3,6 @@ from time import sleep
 from faker import Faker
 import configparser , webdriver_manager as wm
 
-# config = configparser.ConfigParser()
-# config.read('../../.env',encoding='utf-8-sig')
-# cnf = config['ENVIROMENT_VARIABLES']
-# options = webdriver.ChromeOptions()
-# options.add_argument('--load-extension=path/to/the/extension')
-
 class Core:
     drivers = ['chrome','firefox']
     cnf = {}
@@ -39,6 +33,8 @@ class Core:
 
     def get(self,id,tp='id'):
         return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
+
+    # def xname(se)
 
     def ex(self,id ,tp='id' ):
         elem = self.get(id,tp)
@@ -81,7 +77,7 @@ class Core:
             except Exception as e:
                 continue
                 print( e )
-                
+
         raise
 
     def chrome(self):

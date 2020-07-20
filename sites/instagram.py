@@ -17,8 +17,12 @@ class Instagram(Core):
         self.driver.find_element_by_xpath('//button[@type="submit"]').click()
 
         sleep( 4 )
-        self.trywith("//button[contains(text(), 'Ahora no')]" , "//button[contains(text(), 'Not Now')]").click()
-        # self.driver.find_element_by_xpath().click()
+
+        self.trywith(
+            "//button[contains(text(), 'Ahora no')]" ,
+            "//button[contains(text(), 'Not Now')]"
+        ).click()
+
         sleep( 2 )
 
     def _get_names(self):
@@ -52,7 +56,7 @@ class Instagram(Core):
 
     def followall(self):
         self.driver.get("https://www.instagram.com/explore/people/suggested/")
-        print(self._get_names())
+        print( self._get_names() )
 
     def likeposts(self):
         sleep( 5 )
