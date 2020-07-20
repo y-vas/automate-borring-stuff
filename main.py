@@ -15,7 +15,7 @@ if 'get_followers' in run:
 if 'follow' in run:
     from sites.instagram import Instagram
     bot = Instagram( NAME, PASS )
-    bot.kompini_followers()
+    bot.search()
 
 if 'likeposts' in run:
     from sites.instagram import Instagram

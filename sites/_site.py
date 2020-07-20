@@ -64,7 +64,7 @@ class Core:
 
 # Driver hanndeling
 # ------------------------------------------------------------------------------
-    def _driver(self, driver = None):
+    def _driver( self, driver = None ):
         check_drivers = self.drivers
 
         if driver is not None:

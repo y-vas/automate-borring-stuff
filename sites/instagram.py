@@ -26,6 +26,8 @@ class Instagram(Core):
         sleep( 2 )
 
     def _get_names(self):
+        self.driver.get("https://www.instagram.com/explore/people/suggested/")
+
         sleep( 2 )
         sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
         self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
@@ -48,19 +50,19 @@ class Instagram(Core):
         return names
 
     def search(self):
-        self.driver.get( "https://www.instagram.com/explore/search/" )
-        self.driver.find_element_by_xpath('//input[@placeholder="Search"]').send_keys('vas')
+        names = self._get_names()
+        # names = ['ajuntamentberga'] + names
 
-        scroll = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main')
-        anchors = scroll.find_elements_by_tag_name('a')
+        for x in names:
+            self.driver.get(f'https://www.instagram.com/{x}/')
+            sleep( 0.1 )
+            scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[4]')
+            links = scroll_box.find_elements_by_tag_name('a')
+            if len(links) > 0:
+                links[-1].find_elements_by_tag_name('div').click()
 
-        print( anchors )
-
-    def kompini_followers(self):
-        self.search()
-
-
-        pass
+            sleep(5)
+            break
 
     def followall(self):
         self.driver.get("https://www.instagram.com/explore/people/suggested/")
