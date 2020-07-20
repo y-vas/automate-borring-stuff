@@ -30,33 +30,50 @@ class Instagram(Core):
         sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
         self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
         sleep( 2 )
+
         scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]')
-        last_ht, ht = 0, 1
 
-        while last_ht != ht:
-            last_ht = ht
-
-            sleep( 1 )
-            ht = self.driver.execute_script("""
-                arguments[0].scrollTo(0, arguments[0].scrollHeight);
-                return arguments[0].scrollHeight;
-                """, scroll_box
-            )
+        # last_ht, ht = 0, 1
+        # while last_ht != ht:
+        #     last_ht = ht
+        #     sleep( 1 )
+        #     ht = self.driver.execute_script("""
+        #         arguments[0].scrollTo(0, arguments[0].scrollHeight);
+        #         return arguments[0].scrollHeight;
+        #         """, scroll_box
+        #     )
 
         links = scroll_box.find_elements_by_tag_name('a')
         names = [ name.text for name in links if name.text != '' ]
+        return names
 
-        foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
+    def search(self):
+        self.driver.get( "https://www.instagram.com/explore/search/" )
+        self.driver.find_element_by_xpath('//input[@placeholder="Search"]').send_keys('vas')
+
+        scroll = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main')
+        anchors = scroll.find_elements_by_tag_name('a')
+
+        print( anchors )
+
+    def kompini_followers(self):
+        self.search()
+
+
+        pass
+
+    def followall(self):
+        self.driver.get("https://www.instagram.com/explore/people/suggested/")
+
+        # print( self._get_names() )
+        # foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
+        # print( names )
+        # print( foll )
+        # exit()
 
         for fb in foll:
             sleep( 2 )
             fb.click()
-
-        return names
-
-    def followall(self):
-        self.driver.get("https://www.instagram.com/explore/people/suggested/")
-        print( self._get_names() )
 
     def likeposts(self):
         sleep( 5 )

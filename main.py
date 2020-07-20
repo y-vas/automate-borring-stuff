@@ -12,6 +12,11 @@ if 'get_followers' in run:
     bot = Instagram( NAME, PASS )
     bot.followall()
 
+if 'follow' in run:
+    from sites.instagram import Instagram
+    bot = Instagram( NAME, PASS )
+    bot.kompini_followers()
+
 if 'likeposts' in run:
     from sites.instagram import Instagram
     bot = Instagram( 'USERNAME_INSTA' , 'PASSWORD_INSTA' )
