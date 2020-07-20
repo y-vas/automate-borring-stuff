@@ -30,6 +30,13 @@ class Core:
         self.driver.execute_script("return arguments[0].scrollIntoView();", elem)
         return elem
 
+    def trywith(self,*args):
+        for x in args:
+            try:
+                return self.driver.find_element_by_xpath(x)
+            except Exception as e:
+                print( e )
+
     def get(self,id,tp='id'):
         return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
 
@@ -61,7 +68,6 @@ class Core:
 
 # Driver hanndeling
 # ------------------------------------------------------------------------------
-
     def _driver(self, driver = None):
         check_drivers = self.drivers
 
@@ -72,29 +78,37 @@ class Core:
             try:
                 eval(f"self.{driver}()")
                 return
-            except:
+            except Exception as e:
                 continue
+                print( e )
+                
         raise
 
     def chrome(self):
-        try:
-            self.driver = webdriver.Chrome()
-            return
-        except: print('chrome - not avaliable')
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_experimental_option("useAutomationExtension", False)
+        chrome_options.add_experimental_option("mobileEmulation", { "deviceName": "Nexus 5" })
+        chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
+        chrome_options.add_argument("--incognito")
+
+        self.driver = webdriver.Chrome( options = chrome_options )
 
         try:
             self.driver = webdriver.Chrome(
-                executable_path="/usr/bin/chromedriver"
+                executable_path="/usr/bin/chromedriver",
+                options = chrome_options
             )
-            return
-        except: print('chrome-local - not avaliable')
+        except:
+            print('chrome-local - not avaliable')
 
         try:
             self.driver = webdriver.Chrome(
-                wm.chrome.ChromeDriverManager().install()
+                wm.chrome.ChromeDriverManager().install(),
+                options = chrome_options
             )
-            return
-        except: print('chrome-driver - not avaliable')
+        except:
+            print('chrome-driver - not avaliable')
 
     def firefox(self):
         try:

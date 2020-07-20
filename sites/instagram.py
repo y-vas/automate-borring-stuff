@@ -6,7 +6,7 @@ class Instagram(Core):
         self.host = "https://www.instagram.com/accounts/login/"
         self.password = pw
         self.username = username
-        
+
         Core.__init__(self)
         self._login()
 
@@ -17,7 +17,8 @@ class Instagram(Core):
         self.driver.find_element_by_xpath('//button[@type="submit"]').click()
 
         sleep( 4 )
-        self.driver.find_element_by_xpath("//button[contains(text(), 'Ahora no')]").click()
+        self.trywith("//button[contains(text(), 'Ahora no')]" , "//button[contains(text(), 'Not Now')]").click()
+        # self.driver.find_element_by_xpath().click()
         sleep( 2 )
 
     def _get_names(self):
