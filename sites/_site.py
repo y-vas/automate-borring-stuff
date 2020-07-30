@@ -1,7 +1,8 @@
 from selenium import webdriver
-from time import sleep
+from time import sleep, time
 from faker import Faker
-import configparser , webdriver_manager as wm
+import random
+
 
 class Core:
     drivers = ['chrome','firefox']
@@ -15,9 +16,21 @@ class Core:
 
         self.driver.get( self.host )
         self.fk = Faker()
+        self.sametask = int(time() + 15)
+
+    def tired( self ):
+        if self.sametask <= time():
+            self.sametask = random.randint(
+                int(   time()   ),
+                int(time() + 22 )
+            )
+            return True
+
+        return False
 
     def rd(self,ru = ''):
-        self.driver.get( f'{self.host}/{ru}' )
+        self.driver.get( f'{self.host}{ru}' )
+        sleep( 2 )
 
     def go(self,id,tp='id'):
         elem = self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
@@ -33,8 +46,6 @@ class Core:
 
     def get(self,id,tp='id'):
         return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
-
-    # def xname(se)
 
     def ex(self,id ,tp='id' ):
         elem = self.get(id,tp)
@@ -65,22 +76,18 @@ class Core:
 # Driver hanndeling
 # ------------------------------------------------------------------------------
     def _driver( self, driver = None ):
-        check_drivers = self.drivers
 
-        if driver is not None:
-            check_drivers = [driver]
-
-        for driver in check_drivers :
+        for driver in  self.drivers:
             try:
-                eval(f"self.{driver}()")
+                eval( f"self.{driver}()" )
                 return
             except Exception as e:
                 continue
-                print( e )
 
-        raise
+        print('No drivers installed')
+        exit()
 
-    def chrome(self):
+    def chrome( self ):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_experimental_option("useAutomationExtension", False)
@@ -88,7 +95,17 @@ class Core:
         chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
         chrome_options.add_argument("--incognito")
 
-        self.driver = webdriver.Chrome( options = chrome_options )
+        try:
+            from webdriver_manager.chrome import ChromeDriverManager
+            self.driver = webdriver.Chrome(ChromeDriverManager().install())
+            return
+        except Exception as e:
+            print('webdriver_manager : not avaliable')
+
+        try:
+            self.driver = webdriver.Chrome( options = chrome_options )
+        except Exception as e:
+            print('chrome-default - not avaliable')
 
         try:
             self.driver = webdriver.Chrome(
@@ -99,24 +116,29 @@ class Core:
             print('chrome-local - not avaliable')
 
         try:
+            from webdrivermanager import ChromeDriverManager
+            gdd = ChromeDriverManager()
+
             self.driver = webdriver.Chrome(
-                wm.chrome.ChromeDriverManager().install(),
+                gdd.download_and_install()[0],
                 options = chrome_options
             )
-        except:
+        except Exception as e:
+            # print(e)
             print('chrome-driver - not avaliable')
 
+        raise
+
     def firefox(self):
+        from webdrivermanager import GeckoDriverManager
+        gdd = GeckoDriverManager()
+        path = gdd.download_and_install()
+        print( path )
+
         try:
             self.driver = webdriver.Firefox()
             return
-        except: print('firefox - not avaliable')
-
-        try:
-            self.driver = webdriver.Firefox(
-                executable_path=wm.firefox.GeckoDriverManager().install()
-            )
-            return
-        except: print('firefox-drivers - not avaliable')
+        except:
+            print('firefox - not avaliable')
 
         raise
