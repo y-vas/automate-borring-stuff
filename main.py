@@ -10,7 +10,8 @@ if 'find_job' in run:
 if 'follow' in run:
     from sites.instagram import Instagram
     bot = Instagram( NAME, PASS )
-    bot.followall()
+    bot.likes()
+    # bot.follow()
     # bot.search()
 
 if 'likeposts' in run:
