@@ -2,24 +2,17 @@ import sys
 from secret import *
 run = sys.argv
 
-if 'find_job' in run:
+if 'jobs' in run:
     from sites.linkedin import LinkedIn
     bot = LinkedIn( 'EMAIL', 'PASSWORD' )
     bot.search_jobs( 20 )
 
-if 'follow' in run:
+if 'insta' in run:
     from sites.instagram import Instagram
     bot = Instagram( NAME, PASS )
     bot.likes()
-    # bot.follow()
-    # bot.search()
 
-if 'likeposts' in run:
-    from sites.instagram import Instagram
-    bot = Instagram( 'USERNAME_INSTA' , 'PASSWORD_INSTA' )
-    # bot.likeposts()
-
-if 'get_a_girlfriend' in run:
+if 'girls' in run:
     from sites.tinder import TinderBot
     bot = TinderBot(  )
     bot.login()
