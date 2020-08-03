@@ -62,6 +62,7 @@ class Instagram( Core ):
 
             if self.tired():
                 break
+
             sleep( 2 )
 
 
@@ -77,20 +78,26 @@ class Instagram( Core ):
                 parent = image.find_element_by_xpath('..').find_element_by_xpath('..')
                 self.driver.execute_script('arguments[0].scrollIntoView()', image )
                 parent.click()
+                sleep(2)
 
-                # sleep(2)
-                # hearts = self.driver.find_elements_by_xpath('//*[@aria-label="Me gusta"]')
-                # parent = hearts[0].find_element_by_xpath('..').find_element_by_xpath('..')
-                # parent.click()
+                if random.choice([True,False]):
+                    hearts = self.driver.find_elements_by_xpath('//*[@aria-label="Me gusta"]')
+                    parent = hearts[0].find_element_by_xpath('..').find_element_by_xpath('..')
+                    parent.click()
 
                 close = self.driver.find_elements_by_xpath('//*[@aria-label="Cerrar"]')
                 sleep( 1 )
                 close[0].click()
+            except Exception as e:
+                continue
             finally:
                 sleep(1)
 
             if self.tired():
-                foll = self.driver.find_elements_by_xpath('//header/section/div/div/button[contains(text(), Seguir)]')
-                self.driver.execute_script('arguments[0].scrollIntoView()', foll[0] )
-                foll[0].find_element_by_xpath('..').click()
+                foll = self.driver.find_element_by_xpath(f'//h2[contains(text(), {name[:-1]})]')
+                pare = foll.find_element_by_xpath('..')
+
+                foll = pare.find_elements_by_xpath(f'//button')[0]
+                self.driver.execute_script('arguments[0].scrollIntoView()', foll )
+                self.driver.execute_script('arguments[0].click()', foll )
                 return
