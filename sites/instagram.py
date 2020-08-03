@@ -65,7 +65,6 @@ class Instagram( Core ):
 
             sleep( 2 )
 
-
     def likes(self, name = "nbamemes/"):
         self.rd( name )
         article = self.driver.find_elements_by_xpath('//article')[0]
