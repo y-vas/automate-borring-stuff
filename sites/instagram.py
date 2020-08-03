@@ -1,21 +1,24 @@
 from time import sleep
 from sites._site import Core
+from jict import jict
 import random
 
 class Instagram( Core ):
-    def __init__(self, username, pw):
+    def __init__(self, username, pw , history = {} ):
         self.host = "https://www.instagram.com/"
         self.password = pw
         self.username = username
+        self.history = jict( 'shm//:'+history )
 
         Core.__init__(self)
         self._login()
-
         # skip info
+
         self.trywith(
             "//button[contains(text(), 'Ahora no')]" ,
             "//button[contains(text(), 'Not Now')]"
         ).click()
+
         sleep( 2 )
 
     def _login(self):
@@ -32,71 +35,145 @@ class Instagram( Core ):
         self.driver.execute_script('arguments[0].scrollIntoView()', sugs )
 
         scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]')
-        links = scroll_box.find_elements_by_tag_name('a')
+        links = scroll_box.find_elements_by_tag_name( 'a' )
 
         names = [ name.text for name in links if name.text != '' ]
         return names
 
-    # def search(self):
-    #     names = self.suggestions()
-    #     # names = ['ajuntamentberga'] + names
-    #     for x in names:
-    #         self.rd( f'{x}/' )
-    #         sleep( 0.1 )
-    #         scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[4]')
-    #         links = scroll_box.find_elements_by_tag_name('a')
-    #         if len(links) > 0:
-    #             links[-1].find_elements_by_tag_name('div').click()
-    #         sleep(5)
-    #         break
+    def search(self,like = 'ajuntament'):
+        self.rd( '' )
 
-    def follow(self):
-        names = self.suggestions()
+        self.trywith(
+            "//button[contains(text(), 'Ahora no')]" ,
+            "//button[contains(text(), 'Not Now')]",
+            action = 'click()'
+        )
 
-        scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]')
-        foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
+        search = self.driver.find_element_by_xpath('//input[@placeholder="Busca"]')
+        parent = search.find_element_by_xpath( '..' )
 
-        for fb , name in zip( foll, names ):
-            # fb.click()
-            self.likes(f'{name}/')
+        current = ''
+        for x in like:
+            current += x
+            search.send_keys( x )
+            sleep( 1 )
+            divs = parent.find_elements_by_xpath('div')
+            # print( len(divs) , divs )
+            div = divs[-1].find_element_by_xpath('div/div')
+            # print(div.text)
+            # exit()
+            anchors = div.find_elements_by_tag_name('a')
+            for a in anchors:
+                try:
+                    dive = a.find_element_by_xpath('div/div[2]')
+                    name = dive.find_element_by_xpath('div/span').text
+                    desc = dive.find_element_by_xpath('span').text
 
-            if self.tired():
-                break
+                    print(name)
+                    print(desc)
+                    print('-' * 30 )
+
+                    if not like in desc.lower(): continue
+                    if self.history[name]['followed'] == False:
+                        continue
+
+                    # self.likes(name+'/')
+                    # self.followbtn( name )
+
+                    # self.history[name]['followed'] = True
+                    #
+                    # self.search( like )
+                finally:
+                    continue
+
+        return self.history.keys()
+
+    def follow(self ):
+        if len(self.history.keys()) <3:
+            names = self.search()
+        else:
+            names = list( self.history.keys() )
+
+        # names = self.suggestions()
+        # scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]')
+        # foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
+
+        for name in names:
+
+            # if not 'ajuntamen' in name:
+            #     continue
+
+            if self.history[name]['followed'] == True:
+                continue
+
+            self.likes( f'{name}/' )
+            self.followbtn( name )
+
+
+            # if self.tired():
+            #     # self.follow()
+            #     break
 
             sleep( 2 )
 
+        self.follow()
+
     def likes(self, name = "nbamemes/"):
         self.rd( name )
-        article = self.driver.find_elements_by_xpath('//article')[0]
-        images = article.find_elements_by_xpath('//img')
-
+        article = self.driver.find_elements_by_xpath( '//article' )[0].find_element_by_tag_name("div")
+        images = article.find_elements_by_tag_name( 'img' )
         random.shuffle( images )
 
-        for image in images:
+        if len(images) == 0:
+            print('no images for ', name )
+            return
+
+        if len(images) >= 2:
+            images = images[2:]
+
+        tired = random.randint( 1, len(images) )
+
+        for i, image in enumerate(images):
             try:
                 parent = image.find_element_by_xpath('..').find_element_by_xpath('..')
-                self.driver.execute_script('arguments[0].scrollIntoView()', image )
+                self.driver.execute_script( 'arguments[0].scrollIntoView()' , image )
                 parent.click()
-                sleep(2)
 
-                if random.choice([True,False]):
-                    hearts = self.driver.find_elements_by_xpath('//*[@aria-label="Me gusta"]')
+                sleep( random.randint( 2, 6 ) )
+
+                self.history[name[:-1]].increase('maxlikes', i )
+
+                # if you want to randomly like a post
+                # if random.choice([ True, False ]):
+                hearts = self.driver.find_elements_by_xpath('//*[@aria-label="Me gusta"]')
+                if len(hearts) > 0:
                     parent = hearts[0].find_element_by_xpath('..').find_element_by_xpath('..')
                     parent.click()
 
-                close = self.driver.find_elements_by_xpath('//*[@aria-label="Cerrar"]')
-                sleep( 1 )
-                close[0].click()
+                sleep( 0.5 )
+                close = self.driver.find_elements_by_xpath( '//*[@aria-label="Cerrar"]' )[0]
+                close.click()
+                sleep( 0.5 )
+
             except Exception as e:
+                print( e )
+                raise
                 continue
             finally:
                 sleep(1)
 
-            if self.tired():
-                foll = self.driver.find_element_by_xpath(f'//h2[contains(text(), {name[:-1]})]')
-                pare = foll.find_element_by_xpath('..')
+            if i == tired:
+                break
 
-                foll = pare.find_elements_by_xpath(f'//button')[0]
-                self.driver.execute_script('arguments[0].scrollIntoView()', foll )
-                self.driver.execute_script('arguments[0].click()', foll )
-                return
+    def followbtn(self, extra ):
+        foll = self.driver.find_element_by_xpath(f'//h2[contains(text(), {extra})]')
+        pare = foll.find_element_by_xpath('..')
+
+        self.driver.execute_script('arguments[0].scrollIntoView()', foll )
+        self.driver.execute_script('arguments[0].click()', foll )
+
+        sleep(2)
+        self.history[extra]['followed'] = True
+        self.history.save()
+
+        print('followed ' + extra )

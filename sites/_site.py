@@ -22,28 +22,34 @@ class Core:
         if self.sametask <= time():
             self.sametask = random.randint(
                 int(   time()   ),
-                int(time() + 22 )
+                int(time() + (60 * 5) )
             )
             return True
 
         return False
 
     def rd(self,ru = ''):
-        self.driver.get( f'{self.host}{ru}' )
-        sleep( 2 )
+        now = self.driver.current_url
+        new = f'{self.host}{ru}'
+        if now != new:
+            self.driver.get( new )
+            sleep( 2 )
 
     def go(self,id,tp='id'):
         elem = self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
         self.driver.execute_script("return arguments[0].scrollIntoView();", elem)
         return elem
 
-    def trywith(self,*args):
+    def trywith(self,*args,action = None):
         for x in args:
             try:
-                return self.driver.find_element_by_xpath(x)
-            except Exception as e:
-                print( e )
-
+                el = self.driver.find_element_by_xpath(x)
+                if action != None:
+                    eval(f'el.{action}')
+                return el
+            finally:
+                pass
+                
     def get(self,id,tp='id'):
         return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
 
