@@ -79,6 +79,11 @@ class Instagram( Core ):
                 parent = image.find_element_by_xpath('..').find_element_by_xpath('..')
                 self.driver.execute_script('arguments[0].scrollIntoView()', image )
                 parent.click()
+
+                heart = self.driver.find_element_by_xpath('//svg[@aria-label="Me gusta"]')
+                parent = heart.find_element_by_xpath('..').find_element_by_xpath('..')
+                parent.click()
+
             finally:
                 sleep(1)
 
