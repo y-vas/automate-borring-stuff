@@ -10,6 +10,7 @@ if 'jobs' in run:
 if 'insta' in run:
     from sites.instagram import Instagram
     bot = Instagram( NAME, PASS )
+    bot.follow()
     bot.likes()
 
 if 'girls' in run:

@@ -9,13 +9,13 @@ class Instagram( Core ):
         self.username = username
 
         Core.__init__(self)
-        # self._login()
-        # # skip info
-        # self.trywith(
-        #     "//button[contains(text(), 'Ahora no')]" ,
-        #     "//button[contains(text(), 'Not Now')]"
-        # ).click()
-        # sleep( 2 )
+        self._login()
+        # skip info
+        self.trywith(
+            "//button[contains(text(), 'Ahora no')]" ,
+            "//button[contains(text(), 'Not Now')]"
+        ).click()
+        sleep( 2 )
 
     def _login(self):
         self.rd('accounts/login/')
@@ -59,16 +59,16 @@ class Instagram( Core ):
         for fb , name in zip( foll, names ):
             # fb.click()
             print( name )
+
             if self.tired():
                 break
-
             sleep( 2 )
 
         self.likes()
 
 
-    def likes(self):
-        self.rd("nbamemes/")
+    def likes(self, name = "nbamemes/"):
+        self.rd( name )
         article = self.driver.find_elements_by_xpath('//article')[0]
         images = article.find_elements_by_xpath('//img')
 
@@ -81,3 +81,6 @@ class Instagram( Core ):
                 parent.click()
             finally:
                 sleep(1)
+
+            if self.tired():
+                return
