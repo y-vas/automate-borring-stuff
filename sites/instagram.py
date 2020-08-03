@@ -10,6 +10,7 @@ class Instagram( Core ):
 
         Core.__init__(self)
         self._login()
+
         # skip info
         self.trywith(
             "//button[contains(text(), 'Ahora no')]" ,
@@ -39,7 +40,6 @@ class Instagram( Core ):
     # def search(self):
     #     names = self.suggestions()
     #     # names = ['ajuntamentberga'] + names
-    #
     #     for x in names:
     #         self.rd( f'{x}/' )
     #         sleep( 0.1 )
@@ -58,13 +58,11 @@ class Instagram( Core ):
 
         for fb , name in zip( foll, names ):
             # fb.click()
-            print( name )
+            self.likes(f'{name}/')
 
             if self.tired():
                 break
             sleep( 2 )
-
-        self.likes()
 
 
     def likes(self, name = "nbamemes/"):
@@ -80,12 +78,19 @@ class Instagram( Core ):
                 self.driver.execute_script('arguments[0].scrollIntoView()', image )
                 parent.click()
 
-                heart = self.driver.find_element_by_xpath('//svg[@aria-label="Me gusta"]')
-                parent = heart.find_element_by_xpath('..').find_element_by_xpath('..')
-                parent.click()
+                # sleep(2)
+                # hearts = self.driver.find_elements_by_xpath('//*[@aria-label="Me gusta"]')
+                # parent = hearts[0].find_element_by_xpath('..').find_element_by_xpath('..')
+                # parent.click()
 
+                close = self.driver.find_elements_by_xpath('//*[@aria-label="Cerrar"]')
+                sleep( 1 )
+                close[0].click()
             finally:
                 sleep(1)
 
             if self.tired():
+                foll = self.driver.find_elements_by_xpath('//header/section/div/div/button[contains(text(), Seguir)]')
+                self.driver.execute_script('arguments[0].scrollIntoView()', foll[0] )
+                foll[0].find_element_by_xpath('..').click()
                 return
