@@ -40,7 +40,7 @@ class Instagram( Core ):
         names = [ name.text for name in links if name.text != '' ]
         return names
 
-    def search(self,like = 'ajuntament'):
+    def search( self,like = 'ajuntament' ):
         self.rd( '' )
 
         self.trywith(
@@ -54,22 +54,18 @@ class Instagram( Core ):
             '//input[@placeholder="Busca"]',
         )
 
-
         parent = search.find_element_by_xpath( '..' )
-
-        self.history.init('to_follow',[])
 
         current = ''
         for x in like:
             current += x
             search.send_keys( x )
             sleep( 1 )
+
             divs = parent.find_elements_by_xpath('div')
-            # print( len(divs) , divs )
             div = divs[-1].find_element_by_xpath('div/div')
-            # print(div.text)
-            # exit()
             anchors = div.find_elements_by_tag_name('a')
+
             for a in anchors:
                 try:
                     dive = a.find_element_by_xpath('div/div[2]')
@@ -86,21 +82,21 @@ class Instagram( Core ):
                     if name not in self.history['followed']:
                         self.history['to_follow'] += [name]
                         self.history.save()
+                        print( self.history )
+                        print( self.history.storepath )
 
-                    # self.likes(name+'/')
-                    # self.followbtn( name )
-
-                    # self.history[name]['to_follow'] = True
-                    #
-                    # self.search( like )
-                finally:
+                except Exception as e:
+                    print(e)
                     continue
+                exit()
 
-        print(self.history)
         return self.history['to_follow']
 
     def follow(self):
-        if len(self.history['to_follow']) <3:
+        self.history.init('to_follow',[])
+        self.history.init('followed', [])
+
+        if len(self.history['to_follow']) < 3:
             names = self.search()
         else:
             names = self.history['to_follow']
@@ -109,7 +105,6 @@ class Instagram( Core ):
         # scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]')
         # foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
 
-        self.history.init('followed',[])
         for name in names:
 
             if name in self.history['followed']:
