@@ -45,7 +45,8 @@ class Core:
             try:
                 if many:
                     els = self.driver.find_elements_by_xpath(x)
-                    if len(els) == 0: raise
+                    if len(els) == 0:
+                        raise Exception('no elements')
                     return els
                 else:
                     el = self.driver.find_element_by_xpath(x)
