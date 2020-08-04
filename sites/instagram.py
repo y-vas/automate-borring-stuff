@@ -52,6 +52,8 @@ class Instagram( Core ):
         search = self.driver.find_element_by_xpath('//input[@placeholder="Busca"]')
         parent = search.find_element_by_xpath( '..' )
 
+        self.history.init('to_follow',[])
+
         current = ''
         for x in like:
             current += x
@@ -73,46 +75,45 @@ class Instagram( Core ):
                     print(desc)
                     print('-' * 30 )
 
-                    if not like in desc.lower(): continue
-                    if self.history[name]['followed'] == False:
+                    if not like in desc.lower():
                         continue
+
+                    if name not in self.history['followed']:
+                        self.history['to_follow'] += [name]
 
                     # self.likes(name+'/')
                     # self.followbtn( name )
 
-                    # self.history[name]['followed'] = True
+                    # self.history[name]['to_follow'] = True
                     #
                     # self.search( like )
                 finally:
                     continue
 
-        return self.history.keys()
+        print(self.history)
+        return self.history['to_follow']
 
     def follow(self ):
-        if len(self.history.keys()) <3:
+        if len(self.history['to_follow']) <3:
             names = self.search()
         else:
-            names = list( self.history.keys() )
+            names = self.history['to_follow']
 
         # names = self.suggestions()
         # scroll_box = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]')
         # foll = scroll_box.find_elements_by_xpath('//button[contains(text(), Seguir)]')
 
+        self.history.init('followed',[])
         for name in names:
 
-            # if not 'ajuntamen' in name:
-            #     continue
-
-            if self.history[name]['followed'] == True:
+            if name in self.history['followed']:
                 continue
 
             self.likes( f'{name}/' )
             self.followbtn( name )
 
-
-            # if self.tired():
-            #     # self.follow()
-            #     break
+            self.history['to_follow'].remove(name)
+            self.history['followed'] += [name]
 
             sleep( 2 )
 
@@ -128,8 +129,8 @@ class Instagram( Core ):
             print('no images for ', name )
             return
 
-        if len(images) >= 2:
-            images = images[2:]
+        if len( images ) > 2:
+            images = images[:2]
 
         tired = random.randint( 1, len(images) )
 
@@ -173,7 +174,4 @@ class Instagram( Core ):
         self.driver.execute_script('arguments[0].click()', foll )
 
         sleep(2)
-        self.history[extra]['followed'] = True
-        self.history.save()
-
         print('followed ' + extra )
