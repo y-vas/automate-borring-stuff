@@ -13,17 +13,9 @@ class Instagram( Core ):
         Core.__init__(self)
         self._login()
 
-        # self.likes('ajvilobidonyar/')
-        # self.rd('ajvilobidonyar/')
-        # self.followbtn( 'ajvilobidonyar' )
-
-        # sleep(9999)
-
-        # skip info
-
         self.trywith(
-            "//button[contains(text(), 'Not Now')]",
             "//button[contains(text(), 'Ahora no')]" ,
+            "//button[contains(text(), 'Not Now')]",
             action = 'click()'
         )
 
@@ -52,14 +44,14 @@ class Instagram( Core ):
         self.rd( '' )
 
         self.trywith(
-            "//button[contains(text(), 'Ahora no')]" ,
             "//button[contains(text(), 'Not Now')]",
+            "//button[contains(text(), 'Ahora no')]" ,
             action = 'click()'
         )
 
         search = self.trywith(
-            '//input[@placeholder="Busca"]',
             '//input[@placeholder="Search"]',
+            '//input[@placeholder="Busca"]',
         )
 
 
@@ -156,8 +148,8 @@ class Instagram( Core ):
                 sleep( random.randint( 3, 6 ) )
 
                 hearts = self.trywith(
-                    '//*[@aria-label="Me gusta"]',
                     '//*[@aria-label="Like"]',
+                    '//*[@aria-label="Me gusta"]',
                     many = True
                 )
 
@@ -169,8 +161,8 @@ class Instagram( Core ):
                 sleep( 0.5 )
 
                 close = self.trywith(
-                    '//*[@aria-label="Cerrar"]',
                     '//*[@aria-label="Close"]',
+                    '//*[@aria-label="Cerrar"]',
                     many=True
                 )[0]
 

@@ -44,7 +44,9 @@ class Core:
         for x in args:
             try:
                 if many:
-                    return self.driver.find_elements_by_xpath(x)
+                    els = self.driver.find_elements_by_xpath(x)
+                    if len(els) == 0: raise
+                    return els
                 else:
                     el = self.driver.find_element_by_xpath(x)
                 if action != None:
