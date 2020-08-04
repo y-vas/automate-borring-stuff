@@ -12,6 +12,13 @@ class Instagram( Core ):
 
         Core.__init__(self)
         self._login()
+
+        # self.likes('ajvilobidonyar/')
+        # self.rd('ajvilobidonyar/')
+        # self.followbtn( 'ajvilobidonyar' )
+
+        # sleep(9999)
+
         # skip info
 
         self.trywith(
@@ -93,7 +100,7 @@ class Instagram( Core ):
         print(self.history)
         return self.history['to_follow']
 
-    def follow(self ):
+    def follow(self):
         if len(self.history['to_follow']) <3:
             names = self.search()
         else:
@@ -169,9 +176,6 @@ class Instagram( Core ):
     def followbtn(self, extra ):
         foll = self.driver.find_element_by_xpath(f'//h2[contains(text(), {extra})]')
         pare = foll.find_element_by_xpath('..')
-
-        self.driver.execute_script('arguments[0].scrollIntoView()', foll )
-        self.driver.execute_script('arguments[0].click()', foll )
-
-        sleep(2)
+        segu = pare.find_element_by_xpath('div/a/button')
+        self.driver.execute_script('arguments[0].click()', segu )
         print('followed ' + extra )
