@@ -82,13 +82,10 @@ class Instagram( Core ):
                     if name not in self.history['followed']:
                         self.history['to_follow'] += [name]
                         self.history.save()
-                        print( self.history )
-                        print( self.history.storepath )
 
                 except Exception as e:
                     print(e)
                     continue
-                exit()
 
         return self.history['to_follow']
 
@@ -150,8 +147,7 @@ class Instagram( Core ):
                     many = True
                 )
 
-
-                if len(hearts) > 0:
+                if hearts != None and len(hearts) > 0:
                     parent = hearts[0].find_element_by_xpath('..').find_element_by_xpath('..')
                     parent.click()
 
