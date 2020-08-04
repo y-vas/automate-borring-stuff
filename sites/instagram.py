@@ -72,8 +72,8 @@ class Instagram( Core ):
                     name = dive.find_element_by_xpath('div/span').text
                     desc = dive.find_element_by_xpath('span').text
 
-                    print(name)
-                    print(desc)
+                    print( name )
+                    print( desc )
                     print('-' * 30 )
 
                     if not like in desc.lower():
