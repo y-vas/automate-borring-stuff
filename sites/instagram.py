@@ -22,9 +22,10 @@ class Instagram( Core ):
         # skip info
 
         self.trywith(
+            "//button[contains(text(), 'Not Now')]",
             "//button[contains(text(), 'Ahora no')]" ,
-            "//button[contains(text(), 'Not Now')]"
-        ).click()
+            action = 'click()'
+        )
 
         sleep( 2 )
 
@@ -56,7 +57,12 @@ class Instagram( Core ):
             action = 'click()'
         )
 
-        search = self.driver.find_element_by_xpath('//input[@placeholder="Busca"]')
+        search = self.trywith(
+            '//input[@placeholder="Busca"]',
+            '//input[@placeholder="Search"]',
+        )
+
+
         parent = search.find_element_by_xpath( '..' )
 
         self.history.init('to_follow',[])
@@ -147,19 +153,27 @@ class Instagram( Core ):
                 self.driver.execute_script( 'arguments[0].scrollIntoView()' , image )
                 parent.click()
 
-                sleep( random.randint( 2, 6 ) )
+                sleep( random.randint( 3, 6 ) )
 
-                self.history[name[:-1]].increase('maxlikes', i )
+                hearts = self.trywith(
+                    '//*[@aria-label="Me gusta"]',
+                    '//*[@aria-label="Like"]',
+                    many = True
+                )
 
-                # if you want to randomly like a post
-                # if random.choice([ True, False ]):
-                hearts = self.driver.find_elements_by_xpath('//*[@aria-label="Me gusta"]')
+
                 if len(hearts) > 0:
                     parent = hearts[0].find_element_by_xpath('..').find_element_by_xpath('..')
                     parent.click()
 
                 sleep( 0.5 )
-                close = self.driver.find_elements_by_xpath( '//*[@aria-label="Cerrar"]' )[0]
+
+                close = self.trywith(
+                    '//*[@aria-label="Cerrar"]',
+                    '//*[@aria-label="Close"]',
+                    many=True
+                )[0]
+
                 close.click()
                 sleep( 0.5 )
 
@@ -176,6 +190,6 @@ class Instagram( Core ):
     def followbtn(self, extra ):
         foll = self.driver.find_element_by_xpath(f'//h2[contains(text(), {extra})]')
         pare = foll.find_element_by_xpath('..')
-        segu = pare.find_element_by_xpath('div/a/button')
+        segu = pare.find_elements_by_tag_name('button')[0]
         self.driver.execute_script('arguments[0].click()', segu )
         print('followed ' + extra )

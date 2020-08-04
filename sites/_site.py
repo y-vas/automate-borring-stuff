@@ -40,16 +40,21 @@ class Core:
         self.driver.execute_script("return arguments[0].scrollIntoView();", elem)
         return elem
 
-    def trywith(self,*args,action = None):
+    def trywith(self,*args,action = None,many= False):
         for x in args:
             try:
-                el = self.driver.find_element_by_xpath(x)
+                if many:
+                    return self.driver.find_elements_by_xpath(x)
+                else:
+                    el = self.driver.find_element_by_xpath(x)
                 if action != None:
                     eval(f'el.{action}')
                 return el
+            except Exception as e:
+                print( e )
             finally:
                 pass
-                
+
     def get(self,id,tp='id'):
         return self.driver.find_element_by_xpath(f'//*[@{tp}="{id}"]')
 
