@@ -54,7 +54,8 @@ class Core:
                     eval(f'el.{action}')
                 return el
             except Exception as e:
-                print( e )
+                # print( e )
+                pass
             finally:
                 pass
 

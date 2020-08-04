@@ -110,9 +110,10 @@ class Instagram( Core ):
             self.likes( f'{name}/' )
             self.followbtn( name )
 
-            self.history['to_follow'].remove(name)
             self.history['followed'] += [name]
             self.history.save()
+
+            print('saved',name)
 
             sleep( 2 )
 
