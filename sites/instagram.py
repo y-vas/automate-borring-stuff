@@ -8,7 +8,7 @@ class Instagram( Core ):
         self.host = "https://www.instagram.com/"
         self.password = pw
         self.username = username
-        self.history = jict( 'shm//:'+history )
+        self.history = jict( history )
 
         Core.__init__(self)
         self._login()
@@ -85,6 +85,7 @@ class Instagram( Core ):
 
                     if name not in self.history['followed']:
                         self.history['to_follow'] += [name]
+                        self.history.save()
 
                     # self.likes(name+'/')
                     # self.followbtn( name )
@@ -119,12 +120,13 @@ class Instagram( Core ):
 
             self.history['to_follow'].remove(name)
             self.history['followed'] += [name]
+            self.history.save()
 
             sleep( 2 )
 
         self.follow()
 
-    def likes(self, name = "nbamemes/"):
+    def likes( self, name = "nbamemes/" ):
         self.rd( name )
         article = self.driver.find_elements_by_xpath( '//article' )[0].find_element_by_tag_name("div")
         images = article.find_elements_by_tag_name( 'img' )
