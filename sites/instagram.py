@@ -113,8 +113,6 @@ class Instagram( Core ):
             self.history['followed'] += [name]
             self.history.save()
 
-            print('saved',name)
-
             sleep( 2 )
 
         self.follow()
