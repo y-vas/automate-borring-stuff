@@ -3,7 +3,6 @@ from time import sleep, time
 from faker import Faker
 import random
 
-
 class Core:
     drivers = ['chrome','firefox']
     cnf = {}
